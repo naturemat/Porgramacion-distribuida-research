@@ -1,0 +1,30 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: quiz-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/cuestionarios_db}
+    username: ${DB_USER:mentora}
+    password: ${DB_PASSWORD:mentora}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: modulo-c.quiz-service.consumidor
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

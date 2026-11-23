@@ -1,0 +1,31 @@
+package ec.mentora.cue.domain;
+
+import ec.mentora.common.domain.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.util.UUID;
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "preguntas")
+public class Pregunta extends BaseEntity {
+
+    @Column(name = "cuestionario_id", nullable = false)
+    private UUID cuestionarioId;
+
+    @Column(nullable = false, columnDefinition = "text")
+    private String enunciado;
+
+    @Column(nullable = false)
+    private String tipo;
+
+    @Column(nullable = false, precision = 6, scale = 2)
+    private BigDecimal puntaje;
+}
